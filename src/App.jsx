@@ -3,7 +3,6 @@ import { Index } from "./layouts/Index";
 import { Cart } from "./pages/Cart";
 import { Home } from "./pages/Home";
 import { Detail } from "./pages/Detail";
-import Loading from "./components/Loading";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -22,10 +21,6 @@ const App = () => {
         {
           path: "/cart",
           element: <Cart />,
-        },
-        {
-          path: "/loading",
-          element: <Loading />,
         },
       ],
     },

@@ -1,37 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
-import Loading from "./../components/Loading";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductDetail } from "../store/productDetailSlicer";
 
 export const Detail = () => {
   const { id } = useParams();
-
-  const [details, setDetails] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const getProducts = async () => {
-    setLoading(true);
-    try {
-      const url = `https://fakestoreapi.com/products/${id}`;
-      const response = await fetch(url);
-      const data = await response.json();
-      const productDetails = data;
-      setDetails(productDetails);
-      setLoading(false);
-    } catch (err) {
-      console.error("fail to get products details", err);
-    }
-  };
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.productDetail);
+  // console.log(data);
 
   useEffect(
     (_) => {
-      getProducts();
+      dispatch(fetchProductDetail(id));
     },
-    [id]
+    [dispatch, id]
   );
-
-  if (loading) {
-    return <Loading />;
-  }
 
   return (
     <section className="max-w-[800px] mx-auto">
@@ -41,19 +24,34 @@ export const Detail = () => {
           Back
         </NavLink>
       </div>
+      {data.isLoading ? (
+        <h1 className="mx-auto">Loading...</h1>
+      ) : (
+        <div className="flex items-center justify-center gap-20 flex-col">
+          <div>
+            <img src={data.data.image} alt={data.data.id} className="w-32" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-normal">{data.data.title}</h1>
+            <p>Price - {data.data.price}USD</p>
+            <p>Category - {data.data.category}</p>
+            <p>Details - {data.data.description}</p>
+          </div>
+        </div>
+      )}
       {
         <>
-          <div className="flex items-center justify-center gap-20 flex-col">
+          {/* <div className="flex items-center justify-center gap-20 flex-col">
             <div>
-              <img src={details.image} alt={details.id} className="w-32" />
+              <img src={data.image} alt={data.id} className="w-32" />
             </div>
             <div>
-              <h1 className="text-2xl font-normal">{details.title}</h1>
-              <p>Price - {details.price}USD</p>
-              <p>Category - {details.category}</p>
-              <p>Details - {details.description}</p>
+              <h1 className="text-2xl font-normal">{data.title}</h1>
+              <p>Price - {data.price}USD</p>
+              <p>Category - {data.category}</p>
+              <p>Details - {data.description}</p>
             </div>
-          </div>
+          </div> */}
         </>
       }
     </section>

@@ -7,7 +7,6 @@ export const Detail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const data = useSelector((state) => state.productDetail);
-  // console.log(data);
 
   useEffect(
     (_) => {
@@ -17,7 +16,7 @@ export const Detail = () => {
   );
 
   return (
-    <section className="max-w-[800px] mx-auto">
+    <section className="max-w-[300px] sm:max-w-[800px] mx-auto">
       <div className="flex items-center justify-between mt-4 mb-4">
         <p className="text-3xl font-bold">Product Detail</p>
         <NavLink className="bg-black px-2 py-1 text-white rounded-md" to={"/"}>

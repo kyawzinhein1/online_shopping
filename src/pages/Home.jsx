@@ -7,7 +7,6 @@ import { addToCart } from "../store/cartSlicer";
 export const Home = () => {
   const dispatch = useDispatch();
   const data = useSelector((state) => state.product);
-  // console.log(data);
 
   useEffect(
     (_) => {
@@ -18,11 +17,10 @@ export const Home = () => {
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
-    window.confirm("Confirm?");
   };
 
   return (
-    <div className="flex flex-wrap gap-14 mt-10 mx-auto">
+    <div className="flex flex-wrap gap-8 mt-10 mx-auto max-w-[220px] sm:max-w-[800px]">
       {data.isLoading ? (
         <h1 className="mx-auto">Loading...</h1>
       ) : (
@@ -30,7 +28,7 @@ export const Home = () => {
           return (
             <div
               key={product.id}
-              className="w-60 p-4 bg-white shadow-md rounded-lg overflow-hidden relative mx-auto hover:bg-gray-100 transition-all"
+              className="w-60 p-4 bg-white shadow-md rounded-lg overflow-hidden relative mx-auto"
             >
               <Link to={`/products/${product.id}`}>
                 <div className="w-full h-40 mx-auto mb-4">
@@ -51,7 +49,7 @@ export const Home = () => {
                   onClick={() => {
                     handleAddToCart(product);
                   }}
-                  className="bg-blue-600 text-white px-4 py-2 rounded-md absolute bottom-4 left-1/2 transform -translate-x-1/2"
+                  className="bg-blue-600 text-white px-2 py-2 rounded-md absolute bottom-4 left-1/2 transform -translate-x-1/2"
                 >
                   Add to Cart
                 </button>

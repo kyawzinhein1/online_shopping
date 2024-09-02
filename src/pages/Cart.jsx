@@ -31,8 +31,8 @@ export const Cart = () => {
   }
 
   return (
-    <div className="max-w-[800px] mx-auto">
-      <h2 className="text-3xl font-bold mb-4">Cart</h2>
+    <div className="max-w-[440px] sm:max-w-[800px] mx-auto">
+      <h2 className="text-xl font-bold mb-4">Cart</h2>
       {cartItems.map((item) => (
         <div
           key={item.id}
@@ -62,7 +62,15 @@ export const Cart = () => {
           </div>
         </div>
       ))}
-      <p>Total Amount : {calculateTotalAmount()} USD</p>
+      <div className="flex items-center justify-between mt-3">
+        <p>Total Amount : {calculateTotalAmount()} USD</p>
+        <button
+          type="button"
+          className="bg-green-500 text-white px-2 py-2 rounded-md hover:bg-green-600 transition-all"
+        >
+          Checkout
+        </button>
+      </div>
     </div>
   );
 };
